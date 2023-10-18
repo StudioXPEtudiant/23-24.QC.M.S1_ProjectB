@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
@@ -5,8 +6,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
 
     public float lookRadius = 10f;
-    public float cooldown = 2.5f;
-    
+    public float cooldown = 1.5f;
     
     private bool canAttack = true;
     
@@ -25,24 +25,35 @@ public class Enemy : MonoBehaviour {
         float distance = Vector3.Distance(target.position, transform.position);
 
         // If inside the radius
-        if (distance <= lookRadius)
-        {
-            // Move towards the player
-            agent.SetDestination(target.position);
-            if (distance <= agent.stoppingDistance)
-            {
-                // Attack
+        //if (distance <= lookRadius)
 
-                if (target.GetComponent<PlayerHealth>() && canAttack)
-                {
-                    target.GetComponent<PlayerHealth>().health -= 1;
-                    
-                    print("player attacked");
-                    
-                    StartCoroutine(Cooldown());
-                }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, (target.position - transform.position).normalized, out hit, lookRadius));
+        {
+            if (hit.collider != null && hit.transform.position == target.transform.position)
+            {
                 
-                FaceTarget();
+                // Move towards the player
+                agent.SetDestination(target.position);
+                if (distance <= agent.stoppingDistance)
+                {
+                    // Attack
+
+                    if (target.GetComponent<PlayerHealth>() && canAttack)
+                    {
+                        target.GetComponent<PlayerHealth>().health -= 1;
+
+                        print("player attacked");
+
+                        StartCoroutine(Cooldown());
+                    }
+
+                    FaceTarget();
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }
