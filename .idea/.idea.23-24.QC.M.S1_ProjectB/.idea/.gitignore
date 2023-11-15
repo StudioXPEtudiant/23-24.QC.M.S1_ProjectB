@@ -2,10 +2,17 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
+<<<<<<< HEAD
+/modules.xml
+/.idea.23-24.QC.M.S1_ProjectB.iml
+/projectSettingsUpdater.xml
+/contentModel.xml
+=======
 /contentModel.xml
 /modules.xml
 /.idea.23-24.QC.M.S1_ProjectB.iml
 /projectSettingsUpdater.xml
+>>>>>>> 5c3ec68c19d1584b3a8b24890a5a14a89e444fb5
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
