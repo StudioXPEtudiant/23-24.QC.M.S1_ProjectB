@@ -5,10 +5,17 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+    [Header("AI Settings")]
+    [Space]
     public float lookRadius = 10f;
+    public float wanderRadius = 20f;
     public float cooldown = 1.5f;
+    public float wanderTimer;
+    
+    private float timer;
     
     private bool canAttack = true;
+    private bool isWandring = false;
     
     public Transform target;
     NavMeshAgent agent;
@@ -17,6 +24,8 @@ public class Enemy : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
         canAttack = true;
+        
+        timer = wanderTimer;
     }
 
     void Update ()
@@ -53,9 +62,27 @@ public class Enemy : MonoBehaviour {
             }
             else
             {
-                return;
+                timer += Time.deltaTime;
+ 
+                if (timer >= wanderTimer) {
+                    Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, -1);
+                    agent.SetDestination(newPos);
+                    timer = 0;
+                }
             }
         }
+    }
+
+    public static Vector3 RandomNavSphere (Vector3 origin, float distance, int layerMask) {
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * distance;
+           
+        randomDirection += origin;
+           
+        NavMeshHit navHit;
+        
+        UnityEngine.AI.NavMesh.SamplePosition (randomDirection, out navHit, distance, layerMask);
+           
+        return navHit.position;
     }
 
     IEnumerator Cooldown()
@@ -74,11 +101,19 @@ public class Enemy : MonoBehaviour {
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
+    
+    void TurnToAngle(Quaternion lookRotation)
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
 
     void OnDrawGizmosSelected ()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, wanderRadius);
     }
 
 }
