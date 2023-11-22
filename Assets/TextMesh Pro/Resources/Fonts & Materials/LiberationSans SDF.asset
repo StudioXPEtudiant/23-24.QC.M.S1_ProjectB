@@ -13,7 +13,11 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
+<<<<<<< HEAD
   m_LightmapFlags: 1
+=======
+  m_LightmapFlags: 4
+>>>>>>> d3e90d8191b361ecc304efdea9ec31c9f4e3bc32
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -38,9 +42,15 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
+<<<<<<< HEAD
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 1
     - _ScaleRatioC: 0.73125
+=======
+    - _ScaleRatioA: 1
+    - _ScaleRatioB: 1
+    - _ScaleRatioC: 1
+>>>>>>> d3e90d8191b361ecc304efdea9ec31c9f4e3bc32
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
