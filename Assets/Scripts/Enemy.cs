@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour {
                         StartCoroutine(Cooldown());
                     }
 
-                    FaceTarget();
+                    //FaceTarget();
                 }
             }
             else
