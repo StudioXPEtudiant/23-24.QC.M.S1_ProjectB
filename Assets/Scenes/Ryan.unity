@@ -885,7 +885,7 @@ Transform:
   m_GameObject: {fileID: 1150777161}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1080,9 +1080,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1498327973}
-  speed: 12
+  speed: 7
   gravity: -9.81
-  jumpHeight: 3
+  jumpHeight: 1
+  mouseSensitivity: 100
+  camera: {fileID: 1875715081}
 --- !u!114 &1498327975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,9 +1097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a093d7b98d2b2234093dd7fb9165dad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 0}
-  projectileSpawn: {fileID: 0}
-  force: 0
+  projectilePrefab: {fileID: 8774174045083826195, guid: d15c8e1183de93e4189689360726cdc1, type: 3}
+  projectileSpawn: {fileID: 1150777162}
+  force: 1000
 --- !u!1 &1513673481
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1155,6 @@ GameObject:
   - component: {fileID: 1875715081}
   - component: {fileID: 1875715080}
   - component: {fileID: 1875715079}
-  - component: {fileID: 1875715082}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1236,20 +1237,6 @@ Transform:
   - {fileID: 1150777162}
   m_Father: {fileID: 1498327963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1875715082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875715078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 937925a5c4ff86c468de9ed7e1e3b536, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 100
-  playerBody: {fileID: 1498327963}
 --- !u!1001 &1950962514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1324,6 +1311,7 @@ GameObject:
   - component: {fileID: 1975960226}
   - component: {fileID: 1975960225}
   - component: {fileID: 1975960229}
+  - component: {fileID: 1975960231}
   - component: {fileID: 1975960230}
   m_Layer: 0
   m_Name: Enemy
@@ -1460,6 +1448,25 @@ MonoBehaviour:
   cooldown: 1.5
   wanderTimer: 5
   target: {fileID: 1498327963}
+--- !u!114 &1975960231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975960224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1984894534
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,11 +11,14 @@ public class Enemy : MonoBehaviour {
     public float wanderRadius = 20f;
     public float cooldown = 1.5f;
     public float wanderTimer;
+    public float stuntTime = 5f;
     
     private float timer;
     
     private bool canAttack = true;
     private bool isWandring = false;
+
+    private bool canMove = true;
     
     public Transform target;
     NavMeshAgent agent;
@@ -39,6 +42,13 @@ public class Enemy : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, (target.position - transform.position).normalized, out hit, lookRadius));
         {
+            if (!canMove)
+            {
+                agent.SetDestination(transform.position);
+                
+                return;
+            }
+
             if (hit.collider != null && hit.transform.position == target.transform.position)
             {
                 
@@ -92,6 +102,20 @@ public class Enemy : MonoBehaviour {
         yield return new WaitForSeconds(cooldown);
 
         canAttack = true;
+    }
+
+    public void Stunt()
+    {
+        StartCoroutine(StuntCoroutine());
+    }
+
+    IEnumerator StuntCoroutine()
+    {
+        canMove = false;
+        
+        yield return new WaitForSeconds(stuntTime);
+        
+        canMove = true;
     }
     
     // Point towards the player
