@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrowProjectile : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    public GameObject[] projectilePrefab;
 
     public Transform projectileSpawn;
 
@@ -20,7 +20,7 @@ public class ThrowProjectile : MonoBehaviour
     {
         if (canShoot && Input.GetKeyDown(KeyCode.F))
         {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, projectileSpawn.transform.rotation);
+            GameObject projectile = Instantiate(projectilePrefab[Random.Range(0, projectilePrefab.Length)], projectileSpawn.position, projectileSpawn.transform.rotation);
             projectile.GetComponent<Rigidbody>().AddForce(projectileSpawn.forward * force);
 
             StartCoroutine(Cooldown());
