@@ -47,4 +47,9 @@ public class Score : MonoBehaviour
             }
         }
     }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("score", score);
+    }
 }

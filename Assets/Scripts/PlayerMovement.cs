@@ -32,12 +32,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity.y = 0f;
         }
 
         if ((controller.collisionFlags & CollisionFlags.Above) != 0)
         {
-            velocity.y = -2f;
+            velocity.y = 0f;
         }
         
         float x = Input.GetAxis("Horizontal");
@@ -47,10 +47,10 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
+        /*if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -3f * gravity);
-        }
+        }*/
         
         velocity.y += gravity * Time.deltaTime;
 

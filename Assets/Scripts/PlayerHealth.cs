@@ -22,7 +22,10 @@ public class PlayerHealth : MonoBehaviour
         
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>())
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>().GameOver();
+            }
         }
     }
 }

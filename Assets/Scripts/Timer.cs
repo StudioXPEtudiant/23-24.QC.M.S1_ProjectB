@@ -32,7 +32,10 @@ public class Timer : MonoBehaviour
                 timeLeft = 0;
                 timerOn = false;
 
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>())
+                {
+                    GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>().GameOver();
+                }
             }
         }
     }
