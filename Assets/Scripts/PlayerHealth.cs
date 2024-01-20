@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class PlayerHealth : MonoBehaviour
     public int health = 3;
     public Slider healthBar;
 
+    private void Start()
+    {
+        healthBar.maxValue = health;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +22,10 @@ public class PlayerHealth : MonoBehaviour
         
         if (health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>())
+            {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<MainGameManager>().GameOver();
+            }
         }
     }
 }
