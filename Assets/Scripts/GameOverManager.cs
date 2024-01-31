@@ -10,8 +10,10 @@ public class GameOverManager : MonoBehaviour
 {
     public TMP_Text scoreText;
     public Button restartButton;
+    public Button mainMenuButton;
 
     public string mainGameSceneName;
+    public string mainMenuSceneName;
     
     private int score;
     
@@ -24,11 +26,17 @@ public class GameOverManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         
         restartButton.onClick.AddListener(Restart);
+        mainMenuButton.onClick.AddListener(MainMenu);
     }
 
     private void Restart()
     {
         SceneManager.LoadScene(mainGameSceneName);
+    }
+
+    private void MainMenu()
+    {
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     private void OnEnable()

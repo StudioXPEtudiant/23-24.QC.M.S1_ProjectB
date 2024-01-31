@@ -41,7 +41,6 @@ public class Score : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     score++;
-                    print("lol");
                     Destroy(collectables[i]);
                 }
             }
