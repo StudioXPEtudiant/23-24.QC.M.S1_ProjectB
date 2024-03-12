@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class Score : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Score : MonoBehaviour
     public TMP_Text interactionText;
 
     public float radius = 2.5f;
+    
+    public string gameplayActionMapName;
 
     private GameObject[] collectables;
     
@@ -38,7 +41,7 @@ public class Score : MonoBehaviour
             {
                 interactionText.gameObject.SetActive(true);
                 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (GetComponent<PlayerInput>().actions.FindAction("Interact").triggered)
                 {
                     score++;
                     Destroy(collectables[i]);

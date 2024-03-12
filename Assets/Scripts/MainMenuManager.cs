@@ -10,12 +10,10 @@ public class MainMenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionMenu;
-    
-    public Button playButton;
-    public Button optionButton;
-    public Button optionBackButton;
+    public GameObject creditsMenu;
 
-    public Slider sensitivitySlider;
+    public Slider lookSensitivitySlider;
+    public Slider mainGameVolumeSlider;
 
     public string mainGameSceneName;
     
@@ -25,44 +23,72 @@ public class MainMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         
-        if (PlayerPrefs.GetFloat("mouseSensitivity") == 0)
+        if (!PlayerPrefs.HasKey("lookSensitivity"))
         {
-            PlayerPrefs.SetFloat("mouseSensitivity", sensitivitySlider.value);
+            PlayerPrefs.SetFloat("lookSensitivity", lookSensitivitySlider.value);
         }
         else
         {
-            sensitivitySlider.value = PlayerPrefs.GetFloat("mouseSensitivity");
+            lookSensitivitySlider.value = PlayerPrefs.GetFloat("lookSensitivity");
+        }
+
+        if (!PlayerPrefs.HasKey("mainGameVolume"))
+        {
+            PlayerPrefs.SetFloat("mainGameVolume", mainGameVolumeSlider.value / 100);
+        }
+        else
+        {
+            mainGameVolumeSlider.value = PlayerPrefs.GetFloat("mainGameVolume") * 100;
         }
         
         mainMenu.SetActive(true);
         optionMenu.SetActive(false);
         
-        playButton.onClick.AddListener(Play);
-        optionButton.onClick.AddListener(Options);
-        optionBackButton.onClick.AddListener(OptionsBack);
-        
-        sensitivitySlider.onValueChanged.AddListener(SensitivityChanged);
+        lookSensitivitySlider.onValueChanged.AddListener(LookSensitivityChanged);
+        mainGameVolumeSlider.onValueChanged.AddListener(MainGameVolumeChanged);
     }
 
-    private void Play()
+    public void Play()
     {
         SceneManager.LoadScene(mainGameSceneName);
     }
+    
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
-    private void Options()
+    public void Options()
     {
         mainMenu.SetActive(false);
         optionMenu.SetActive(true);
     }
+    
+    public void Credits()
+    {
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
+    }
 
-    private void OptionsBack()
+    public void OptionsBack()
     {
         mainMenu.SetActive(true);
         optionMenu.SetActive(false);
     }
-
-    private void SensitivityChanged(float newSensitivity)
+    
+    public void CreditsBack()
     {
-        PlayerPrefs.SetFloat("mouseSensitivity", sensitivitySlider.value);
+        mainMenu.SetActive(true);
+        creditsMenu.SetActive(false);
+    }
+
+    public void LookSensitivityChanged(float newSensitivity)
+    {
+        PlayerPrefs.SetFloat("lookSensitivity", lookSensitivitySlider.value);
+    }
+    
+    public void MainGameVolumeChanged(float newVolume)
+    {
+        PlayerPrefs.SetFloat("mainGameVolume", mainGameVolumeSlider.value / 100);
     }
 }

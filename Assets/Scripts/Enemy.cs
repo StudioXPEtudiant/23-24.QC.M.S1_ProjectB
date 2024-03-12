@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour {
         //if (distance <= lookRadius)
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, (target.position - transform.position).normalized, out hit, lookRadius));
+        if (Physics.Raycast(transform.position, (target.position - transform.position).normalized, out hit, lookRadius, Physics.AllLayers, QueryTriggerInteraction.Ignore));
         {
             if (!canMove)
             {

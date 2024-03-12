@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class ThrowProjectile : MonoBehaviour
 {
@@ -8,17 +12,32 @@ public class ThrowProjectile : MonoBehaviour
 
     public Transform projectileSpawn;
 
+    public Slider cooldownSlider;
+
     public float force = 100;
     
-    public float coolDownTime = 10f;
-
+    public float cooldownTime = 10f;
+    public float cooldownCurrent;
+    
     private bool canShoot = true;
-
+    
+    private void Start()
+    {
+        cooldownCurrent = cooldownTime;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (canShoot && Input.GetKeyDown(KeyCode.F))
+        cooldownCurrent += Time.deltaTime;
+        cooldownCurrent = Mathf.Clamp(cooldownCurrent, 0.0f, cooldownTime);
+
+        cooldownSlider.value = cooldownCurrent / cooldownTime;
+    }
+
+    public void OnThrow(InputAction.CallbackContext value)
+    {
+        if (canShoot)
         {
             GameObject projectile = Instantiate(projectilePrefab[Random.Range(0, projectilePrefab.Length)], projectileSpawn.position, projectileSpawn.transform.rotation);
             projectile.GetComponent<Rigidbody>().AddForce(projectileSpawn.forward * force);
@@ -33,7 +52,9 @@ public class ThrowProjectile : MonoBehaviour
     {
         canShoot = false;
 
-        yield return new WaitForSeconds(coolDownTime);
+        cooldownCurrent = 0f;
+
+        yield return new WaitForSeconds(cooldownTime);
 
         canShoot = true;
     }

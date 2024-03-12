@@ -15,7 +15,6 @@ public class MainGameManager : MonoBehaviour
     public string gameOverSceneName;
     public string mainMenuSceneName;
     
-    private bool buttonClicked = false;
     private bool onMenu = false;
     
     private void Start()
@@ -26,7 +25,7 @@ public class MainGameManager : MonoBehaviour
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.Escape) || buttonClicked) && onMenu)
+        if (Input.GetKeyDown(KeyCode.Escape) && onMenu)
         {
             gameMenu.SetActive(false);
 
@@ -35,7 +34,7 @@ public class MainGameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            buttonClicked = false;
+            onMenu = false;
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !onMenu)
         {
@@ -43,7 +42,6 @@ public class MainGameManager : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            onMenu = false;
             
             //Time.timeScale = 0;
             
@@ -53,7 +51,14 @@ public class MainGameManager : MonoBehaviour
 
     private void Resume()
     {
-        buttonClicked = true;
+        gameMenu.SetActive(false);
+
+        //Time.timeScale = 1;
+            
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        onMenu = false;
     }
     
     private void MainMenu()
