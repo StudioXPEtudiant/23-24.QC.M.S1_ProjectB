@@ -8,7 +8,7 @@ public class ExitDoor : MonoBehaviour
 {
     public GameObject gameManager;
     
-    public void OnInteract()
+    public void Exit()
     {
         gameManager.GetComponent<MainGameManager>().GameOver();
     }

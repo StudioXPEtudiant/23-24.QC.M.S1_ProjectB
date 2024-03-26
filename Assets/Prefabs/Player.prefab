@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4402164201241453896}
   - component: {fileID: 505294572564162857}
   - component: {fileID: 1189273280493357186}
+  - component: {fileID: 7434587599934100059}
   - component: {fileID: 6116866701314983059}
   m_Layer: 7
   m_Name: Player
@@ -235,6 +236,37 @@ MonoBehaviour:
   force: 1000
   cooldownTime: 10
   cooldownCurrent: 0
+--- !u!114 &7434587599934100059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877252864034185118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58f3ffbdf70c9346a652195dfae1c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventGameobjects:
+  - {fileID: 0}
+  events:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ExitDoor, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  interactionText: {fileID: 0}
+  detectionRadius: 3
 --- !u!114 &6116866701314983059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,35 +293,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 505294572564162857}
-        m_TargetAssemblyTypeName: PlayerMovementRyan, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: fe0ab35e-974d-4f1c-98c7-c66cf5385602
     m_ActionName: Gameplay/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualShock4GamepadHID/leftStick]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 505294572564162857}
-        m_TargetAssemblyTypeName: PlayerMovementRyan, Assembly-CSharp
-        m_MethodName: OnLook
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 743a0a71-e6a4-4443-82e9-8fc2a7f76482
     m_ActionName: Gameplay/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick]
   - m_PersistentCalls:
@@ -309,7 +317,19 @@ MonoBehaviour:
     m_ActionId: 74442ecd-61ec-436c-96fe-06e85c38ffd5
     m_ActionName: Gameplay/Shoot[/Keyboard/f,/DualShock4GamepadHID/rightTrigger]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7434587599934100059}
+        m_TargetAssemblyTypeName: Interact, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a71c0768-937a-4073-b32c-af5c15987355
     m_ActionName: Gameplay/Interact[/Keyboard/e,/DualShock4GamepadHID/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0

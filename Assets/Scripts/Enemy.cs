@@ -22,6 +22,14 @@ public class Enemy : MonoBehaviour {
     
     public Transform target;
     NavMeshAgent agent;
+    [Space]
+    [Header("Animation")]
+    [Space]
+    public Animator animator;
+    
+    private Vector3 previousPosition;
+
+    private float curSpeed;
 
     void Start()
     {
@@ -35,7 +43,10 @@ public class Enemy : MonoBehaviour {
     {
         // Get the distance to the player
         float distance = Vector3.Distance(target.position, transform.position);
-
+        
+        float speed = 0f;
+        speed = Vector3.Project(agent.desiredVelocity, transform.forward).magnitude;
+        
         // If inside the radius
         //if (distance <= lookRadius)
 
@@ -81,6 +92,19 @@ public class Enemy : MonoBehaviour {
                 }
             }
         }
+
+        if (agent.velocity.magnitude < 1 && canMove)
+        {
+            animator.SetBool("Walking", false);
+            animator.SetBool("Stunt", false);
+        }
+        else if (agent.velocity.magnitude >= 1 && canMove)
+        {
+            animator.SetBool("Walking", true);
+            animator.SetBool("Stunt", false);
+        }
+        
+        previousPosition = transform.position;
     }
 
     public static Vector3 RandomNavSphere (Vector3 origin, float distance, int layerMask) {
@@ -112,10 +136,14 @@ public class Enemy : MonoBehaviour {
     IEnumerator StuntCoroutine()
     {
         canMove = false;
+        animator.SetBool("Stunt", true);
+        animator.SetBool("Walking", false);
         
         yield return new WaitForSeconds(stuntTime);
         
         canMove = true;
+        animator.SetBool("Stunt", false);
+        animator.SetBool("Walking", true);
     }
     
     // Point towards the player
